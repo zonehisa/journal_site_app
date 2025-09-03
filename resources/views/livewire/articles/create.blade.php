@@ -3,11 +3,12 @@
 use function Livewire\Volt\{state, rules};
 use App\Models\Article;
 
-state(['title', 'body']);
+state(['title', 'body', 'priority' => 1]);
 
 rules([
     'title' => 'required|string|max:50',
     'body' => 'required|string|max:2000',
+    'priority' => 'required|integer|min:1|max:3',
 ]);
 
 $create = function () {
@@ -15,6 +16,7 @@ $create = function () {
     Article::create([
         'title' => $this->title,
         'body' => $this->body,
+        'priority' => $this->priority,
     ]);
     return redirect()->route('articles.index');
 };
@@ -40,6 +42,18 @@ $create = function () {
             @enderror
             <br>
             <textarea wire:model="body"></textarea>
+        </div>
+        <div>
+            <label for="priority">優先度</label>
+            @error('priority')
+                <span class="error">({{ $message }})</span>
+            @enderror
+            <br>
+            <select wire:model="priority" id="priority">
+                <option value="1">低</option>
+                <option value="2">中</option>
+                <option value="3">高</option>
+            </select>            
         </div>
         <button type="submit">投稿</button>
     </form>
