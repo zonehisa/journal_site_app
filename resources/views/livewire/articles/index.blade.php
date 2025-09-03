@@ -5,6 +5,10 @@ use App\Models\Article;
 
 state(['articles' => fn () => Article::all()]);
 
+$store = function () {
+    return redirect()->route('articles.create');
+}
+
 ?>
 
 <div>
@@ -12,5 +16,6 @@ state(['articles' => fn () => Article::all()]);
     @foreach ($articles as $article)
         <p><a href="{{ route('articles.show', $article) }}">{{ $article->title }}</a></p>
     @endforeach
+    <button wire:click="store">新規論文投稿</button>
 </div>
 

@@ -1,6 +1,7 @@
 <?php
-use App\Models\Article;
+
 use function Livewire\Volt\{state};
+use App\Models\Article;
 
 state(['article' => fn (Article $article) => $article]);
 
