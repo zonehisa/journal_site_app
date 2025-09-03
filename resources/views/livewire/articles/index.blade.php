@@ -7,7 +7,7 @@ state(['articles' => fn () => Article::all()]);
 
 $store = function () {
     return redirect()->route('articles.create');
-}
+};
 
 ?>
 
